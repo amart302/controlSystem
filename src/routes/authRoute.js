@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { body } from "express-validator";
-import { registration, login } from '../controllers/authControllers.js';
+import { registration, login } from '../controllers/authController.js';
 
 const router = new Router();
 
@@ -11,9 +11,6 @@ router.post("/registration", [
     body("email")
         .isEmail().withMessage("Введите корректный email")
         .normalizeEmail(),
-    body("role")
-        .trim()
-        .notEmpty().withMessage("Роль не должна быть пустой"),
     body("password")
         .isLength({ min: 6 })
         .trim()
@@ -30,4 +27,4 @@ router.post("/login", [
         .notEmpty()
 ], login);
 
-export { router };
+export default router;

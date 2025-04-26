@@ -16,9 +16,7 @@ export async function registration(req, res) {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ 
-                message: errors.array()[0].msg,
-            });
+            return res.status(400).json({ message: errors.array()[0].msg });
         }
 
         const { username, email, role, password, } = req.body;
@@ -34,8 +32,8 @@ export async function registration(req, res) {
         });
 
         if(candidate){
-            if(candidate.username === username) return res.status(400).json({ message: "Пользователь с таким именем уже существует" });
-            else if(candidate.email === email) return res.status(400).json({ message: "Пользователь с такой почтой уже существует" });
+            if(candidate.username === username) return res.status(409).json({ message: "Пользователь с таким именем уже существует" });
+            else if(candidate.email === email) return res.status(409).json({ message: "Пользователь с такой почтой уже существует" });
         }
         await User.create({
             username: username,
@@ -46,7 +44,7 @@ export async function registration(req, res) {
         res.status(200).json({ message: "Регистрация прошла успешно" });
     } catch (error) {
         console.log(error);
-        res.status(400).json({ message: "Ошибка регистрации" });
+        res.status(500).json({ message: "Ошибка регистрации" });
     }
 };
 
@@ -61,18 +59,18 @@ export async function login(req, res) {
         });
         
         if(!user){
-            return res.status(400).json({ message: "Не правильный логин или пароль! Повторите вход" });
+            return res.status(401).json({ message: "Не правильный логин или пароль! Повторите вход" });
         }
 
         const validPassword = bcrypt.compareSync(password, user.password);
         if(!validPassword){
-            return res.status(400).json({ message: "Не правильный логин или пароль! Повторите вход 123" });
+            return res.status(401).json({ message: "Не правильный логин или пароль! Повторите вход 123" });
         }
 
         const token = generateAccessToken(user.id);
         res.status(200).json({ token: token });
     } catch (error) {
         console.log(error);
-        res.status(400).json({ message: "Ошибка авторизации" });
+        res.status(500).json({ message: "Ошибка авторизации" });
     }
-}
+};
