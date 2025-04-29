@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { User } from "../models/User.js";
 
 export async function getUsers(req, res){
