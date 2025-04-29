@@ -7,24 +7,29 @@ const router = new Router();
 router.post("/registration", [
     body("username")
         .trim()
-        .notEmpty().withMessage("Имя пользователя не должно быть пустым"),
+        .notEmpty().withMessage("Имя пользователя не должно быть пустым")
+        .isLength({ max: 100 }).withMessage("Имя пользователя слишком длинное"),
     body("email")
+        .notEmpty().withMessage("Email не должен быть пустым")
+        .isLength({ max: 100 }).withMessage("Email слишком длинный")
         .isEmail().withMessage("Введите корректный email")
         .normalizeEmail(),
     body("password")
-        .isLength({ min: 6 })
         .trim()
-        .notEmpty()
+        .notEmpty().withMessage("Пароль не должен быть пустым")
+        .isLength({ min: 4, max: 4 }).withMessage("Пароль должен состоять из 4 символов")
 ], registration);
 
 router.post("/login", [
     body("email")
-    .isEmail().withMessage("Введите корректный email")
-    .normalizeEmail(),
+        .notEmpty().withMessage("Email не должен быть пустым")
+        .isEmail().withMessage("Введите корректный email")
+        .isLength({ max: 100 }).withMessage("Email слишком длинный")
+        .normalizeEmail(),
     body("password")
-        .isLength({ min: 6 })
         .trim()
-        .notEmpty()
+        .notEmpty().withMessage("Пароль не должен быть пустым")
+        .isLength({ min: 4, max: 4 }).withMessage("Пароль должен состоять из 4 символов")
 ], login);
 
 export default router;

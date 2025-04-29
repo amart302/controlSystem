@@ -5,9 +5,9 @@ import jwt from "jsonwebtoken";
 import "dotenv/config";
 import { User } from "../models/User.js";
 
-const generateAccessToken = (id) => {
+const generateAccessToken = (id, role) => {
     const payload = {
-        id,
+        id, role
     };
     return jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "24h" });
 };
@@ -67,7 +67,7 @@ export async function login(req, res) {
             return res.status(401).json({ message: "Не правильный логин или пароль! Повторите вход 123" });
         }
 
-        const token = generateAccessToken(user.id);
+        const token = generateAccessToken(user.id, user.role);
         res.status(200).json({ token: token });
     } catch (error) {
         console.log(error);

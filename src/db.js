@@ -7,7 +7,7 @@ export const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER,
     logging: console.log
 });
 
-async function testConnection(){
+async function startConnection(){
     try {
         await sequelize.authenticate();
         console.log("Успешное подключение к базе данных");
@@ -16,4 +16,4 @@ async function testConnection(){
     }
 };
 
-testConnection();
+startConnection();
