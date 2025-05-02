@@ -6,9 +6,7 @@ import "dotenv/config";
 import { User } from "../models/User.js";
 
 const generateAccessToken = (id, role) => {
-    const payload = {
-        id, role
-    };
+    const payload = { id, role };
     return jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "24h" });
 };
 
@@ -22,7 +20,7 @@ export async function registration(req, res) {
         const { username, email, role, password, } = req.body;
         const hashPassword = bcrypt.hashSync(password, 8);
 
-        const candidate = await User.findOne({
+        const existingUser = await User.findOne({
             where: {
                 [Op.or]: [
                     { username: username },
@@ -31,9 +29,9 @@ export async function registration(req, res) {
             }
         });
 
-        if(candidate){
-            if(candidate.username === username) return res.status(409).json({ message: "Пользователь с таким именем уже существует" });
-            else if(candidate.email === email) return res.status(409).json({ message: "Пользователь с такой почтой уже существует" });
+        if(existingUser){
+            if(existingUser.username === username) return res.status(409).json({ message: "Пользователь с таким именем уже существует" });
+            else if(existingUser.email === email) return res.status(409).json({ message: "Пользователь с такой почтой уже существует" });
         }
         await User.create({
             username: username,
@@ -52,22 +50,18 @@ export async function login(req, res) {
     try {
         const { email, password, } = req.body;
 
-        const user = await User.findOne({
-            where: {
-                email: email
-            }
-        });
+        const existingUser = await User.findOne({ where: { email } });
         
-        if(!user){
+        if(!existingUser){
             return res.status(401).json({ message: "Не правильный логин или пароль! Повторите вход" });
         }
 
-        const validPassword = bcrypt.compareSync(password, user.password);
+        const validPassword = bcrypt.compareSync(password, existingUser.password);
         if(!validPassword){
             return res.status(401).json({ message: "Не правильный логин или пароль! Повторите вход 123" });
         }
 
-        const token = generateAccessToken(user.id, user.role);
+        const token = generateAccessToken(existingUser.id, existingUser.role);
         res.status(200).json({ token: token });
     } catch (error) {
         console.log(error);

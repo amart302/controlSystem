@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db.js";
 
-export const Ingredient = sequelize.define("User", {
+export const Ingredient = sequelize.define("Ingredient", {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -22,7 +22,7 @@ export const Ingredient = sequelize.define("User", {
         },
         quantity: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
         }
     }, {
         tableName: "ingredients",
@@ -32,11 +32,11 @@ export const Ingredient = sequelize.define("User", {
 );
 
 // create table ingredients (
-//   id int(10) primary key,
-//   name varchar(50) not null,
-//   price DECIMAL(10, 2) not null,
-//   unit varchar(10) not null,
-//   quantity DECIMAL(10, 2) not null
+//     id int auto_increment primary key,
+//     name varchar(50) not null,
+//     price decimal(10, 2) not null,
+//     unit varchar(10) not null,
+//     quantity int unsigned not null
 // );
 
 // insert into ingredients (id, name, price, unit, quantity) VALUES

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { body } from "express-validator";
-import { registration, login } from '../controllers/authController.js';
+import { registration, login } from '../controllers/auth.controller.js';
 
 const router = new Router();
 

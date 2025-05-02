@@ -36,8 +36,8 @@ export const User = sequelize.define("User", {
 //     id int auto_increment primary key,
 //     username varchar(255) not null unique,
 //     email varchar(255) not null unique,
-//     role varchar(255) not null,
+//     role varchar(10) not null,
 //     password varchar(255) not null,
-//     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-//     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+//     createdAt datetime not null,
+//     updatedAt datetime not null
 // );
