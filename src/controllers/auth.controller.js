@@ -10,7 +10,7 @@ const generateAccessToken = (id, role) => {
     return jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "24h" });
 };
 
-export async function registration(req, res) {
+export async function singup(req, res) {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -46,7 +46,7 @@ export async function registration(req, res) {
     }
 };
 
-export async function login(req, res) {
+export async function signin(req, res) {
     try {
         const { email, password, } = req.body;
 
@@ -58,7 +58,7 @@ export async function login(req, res) {
 
         const validPassword = bcrypt.compareSync(password, existingUser.password);
         if(!validPassword){
-            return res.status(401).json({ message: "Не правильный логин или пароль! Повторите вход 123" });
+            return res.status(401).json({ message: "Не правильный логин или пароль! Повторите вход" });
         }
 
         const token = generateAccessToken(existingUser.id, existingUser.role);

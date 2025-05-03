@@ -5,6 +5,6 @@ import roleMiddleware from "../middleware/role.middleware.js";
 
 const router = new Router();
 
-router.get("/getUsers/", authMiddleware, roleMiddleware, getUsers);
+router.get("/users", authMiddleware, roleMiddleware, getUsers);
 
 export default router;

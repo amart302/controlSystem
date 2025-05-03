@@ -29,8 +29,6 @@ export const Category = sequelize.define("Category", {
 //     id int auto_increment primary key,
 //     name varchar(255) not null,
 //     image varchar(255) not null,
-//     created_at timestamp default current_timestamp,
-//     updated_at timestamp default current_timestamp on update current_timestamp
 // );
 
 // insert into categories (id, name, image) values

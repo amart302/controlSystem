@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { body } from "express-validator";
-import { registration, login } from '../controllers/auth.controller.js';
+import { singup, signin } from '../controllers/auth.controller.js';
 
 const router = new Router();
 
-router.post("/registration", [
+router.post("/singup", [
     body("username")
         .trim()
         .notEmpty().withMessage("Имя пользователя не должно быть пустым")
@@ -18,9 +18,9 @@ router.post("/registration", [
         .trim()
         .notEmpty().withMessage("Пароль не должен быть пустым")
         .isLength({ min: 4, max: 4 }).withMessage("Пароль должен состоять из 4 символов")
-], registration);
+], singup);
 
-router.post("/login", [
+router.post("/signin", [
     body("email")
         .notEmpty().withMessage("Email не должен быть пустым")
         .isEmail().withMessage("Введите корректный email")
@@ -30,6 +30,6 @@ router.post("/login", [
         .trim()
         .notEmpty().withMessage("Пароль не должен быть пустым")
         .isLength({ min: 4, max: 4 }).withMessage("Пароль должен состоять из 4 символов")
-], login);
+], signin);
 
 export default router;

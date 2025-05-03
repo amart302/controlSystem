@@ -3,6 +3,7 @@ import "dotenv/config";
 import authRoutes from "./routes/auth.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
 import ingredientsRoutes from "./routes/ingredients.routes.js";
+import categoriesRoutes from "./routes/categories.routes.js";
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.use(express.json());
 app.use("/auth", authRoutes);
 app.use("/admin", adminRoutes);
 app.use("/ingredients", ingredientsRoutes);
+app.use("/categories", categoriesRoutes);
 
 const PORT = process.env.PORT || 5000;
 

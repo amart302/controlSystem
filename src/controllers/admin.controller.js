@@ -2,21 +2,17 @@ import { User } from "../models/User.js";
 
 export async function getUsers(req, res){
     try {
-        const { id } = req.user;
-        const user = await User.findOne({
-            where: {
-                id: id
-            }
+        const { count, rows: users } = await User.findAndCountAll({
+            attributes: [ "id", "username", "email", "role" ],
+            order: [[ "username", "ASC" ]]
         });
-        
-        if(!user){
-            return res.status(404).json({ message: "Пользователь не найден" })
-        }
-        
-        const users = await User.findAll();
-        res.status(200).json(users);
+
+        res.status(200).json({
+            totalItems: count,
+            users
+        });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: "Ошибка при выводе списка пользователей" });
+        console.error(error);
+        res.status(500).json({ error: "Ошибка сервера при попытке получить список пользователей" });
     }
 };
