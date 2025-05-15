@@ -15,7 +15,6 @@ export const Category = sequelize.define("Category", {
         image: {
             type: DataTypes.STRING(255),
             allowNull: false,
-            unique: true
         }
     },
     {
@@ -27,7 +26,7 @@ export const Category = sequelize.define("Category", {
 
 // create table categories (
 //     id int auto_increment primary key,
-//     name varchar(255) not null,
+//     name varchar(255) not null unique,
 //     image varchar(255) not null,
 // );
 

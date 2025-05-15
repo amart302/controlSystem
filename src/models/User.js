@@ -32,11 +32,12 @@ export const User = sequelize.define("User", {
         underscored: false
     }
 );
+
 // create table users (
 //     id int auto_increment primary key,
 //     username varchar(255) not null unique,
 //     email varchar(255) not null unique,
-//     role varchar(10) not null,
+//     role enum("admin", "staff") not null,
 //     password varchar(255) not null,
 //     createdAt datetime not null,
 //     updatedAt datetime not null

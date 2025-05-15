@@ -13,12 +13,12 @@ export default function (req, res, next){
 
         const token = authHeader.split(" ")[1];
 
-        const decoded  = jwt.verify(token, process.env.SECRET_KEY);
+        const decoded = jwt.verify(token, process.env.SECRET_KEY);
         req.user = decoded;
         
         next();
     } catch (error) {
         console.log(error);
-        return res.status(403).json({ message: "Ошибка доступа" });
+        return res.status(403).json({ message: "Ошибка доступа, авторозуйтесь повторно" });
     }
 };

@@ -10,7 +10,7 @@ const generateAccessToken = (id, role) => {
     return jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "24h" });
 };
 
-export async function singup(req, res) {
+export async function signup(req, res) {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
