@@ -39,6 +39,8 @@ export const Ingredient = sequelize.define("Ingredient", {
 //     quantity int unsigned not null
 // );
 
+
+
 // insert into ingredients (id, name, price, unit, quantity) VALUES
 // ("Молоко", 15, "мл", 100),
 // ("Кофе", 20, "г", 10),
@@ -50,3 +52,6 @@ export const Ingredient = sequelize.define("Ingredient", {
 // ("Морковь", 5, "г", 50),
 // ("Картофель", 8, "г", 100),
 // ("Сметана", 12, "г", 50);
+
+
+

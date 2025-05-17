@@ -1,18 +1,5 @@
 import { Ingredient } from "../models/Ingredient.js";
 
-// export async function getIngredients(req, res){
-//     try {
-//         const existingIngredients = await Ingredient.findAll();
-//         if(!existingIngredients){
-//             return res.status(404).json({ message: "Списко ингредиентов пуст" });
-//         }
-//         res.status(200).json(existingIngredients);
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).json({ error: "Ошибка сервера при попытке получить список ингредиентов" });
-//     }
-// };
-
 export async function getIngredients(req, res){
     try {
         const { count, rows: ingredients } = await Ingredient.findAndCountAll({

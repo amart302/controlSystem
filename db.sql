@@ -11,7 +11,7 @@ create table users (
 create table categories (
     id int auto_increment primary key,
     name varchar(255) not null unique,
-    image varchar(255) not null
+    image varchar(255)
 );
 
 create table ingredients (
@@ -26,9 +26,10 @@ create table dishes (
     id int auto_increment primary key,
     name varchar(100) not null unique,
     description text,
+    ingredients json,
     price decimal(10, 2) not null,
     category_id int,
-    image varchar(255) not null,
+    image varchar(255),
     cost_price decimal(10, 2) not null,
     foreign key (category_id) references categories(id)
 );

@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { getUsers } from '../controllers/admin.controller.js';
 import authMiddleware from "../middleware/auth.middleware.js";
-import roleMiddleware from "../middleware/role.middleware.js";
+import { addDish, getDishes } from "../controllers/dish.controller.js";
 
 const router = new Router();
 
-router.get("/users", authMiddleware, roleMiddleware, getUsers);
+router.get("/", authMiddleware, getDishes);
+router.post("/", authMiddleware, addDish);
+// router.patch("/", authMiddleware, updateDish);
 
 export default router;

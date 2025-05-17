@@ -24,12 +24,7 @@ export async function addCategory(req, res){
         if(existingCategory){
             return res.status(409).json({ message: "Категория уже существует" });
         }
-        await Category.create({
-            name: name,
-            price: price,
-            unit: unit,
-            quantity: quantity
-        });
+        await Category.create({ name, image });
         res.status(200).json({ message: "Категория успешно добавлена" });
     } catch (error) {
         console.error(error);
@@ -40,14 +35,14 @@ export async function addCategory(req, res){
 export async function updateCategory(req, res){
     try {
         const { id } = req.params;
-        const { name, price, unit, quantity } = req.body;
+        const { name, image } = req.body;
         const existingCategory = await Category.findOne({ where: { id } });
 
         if(!existingCategory){
             return res.status(404).json({ message: "Категория не найдена" });
         }
 
-        await existingCategory.update({ name, price, unit, quantity });
+        await existingCategory.update({ name, image });
         return res.status(200).json({ message: "Категория успешно обновлена" });
     } catch (error) {
         console.error(error);

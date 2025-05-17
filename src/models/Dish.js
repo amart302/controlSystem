@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db.js";
+import { Ingredient } from "./Ingredient.js";
 
 export const Dish = sequelize.define("Dish", {
         id: {
@@ -14,6 +15,9 @@ export const Dish = sequelize.define("Dish", {
         },
         description: {
             type: DataTypes.TEXT,
+        },
+        ingredients: {
+            type: DataTypes.JSON,
         },
         price: {
             type: DataTypes.DECIMAL(10, 2),
@@ -42,9 +46,10 @@ export const Dish = sequelize.define("Dish", {
 //     id int auto_increment primary key,
 //     name varchar(100) not null unique,
 //     description text,
+//     ingredients json,
 //     price decimal(10, 2) not null,
 //     category_id int,
-//     image varchar(255) not null,
+//     image varchar(255),
 //     cost_price decimal(10, 2) not null,
 //     foreign key (category_id) references categories(id)
 // );
